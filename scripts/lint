@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+autoflake --in-place --recursive wrapwith
+isort --recursive wrapwith
+black wrapwith

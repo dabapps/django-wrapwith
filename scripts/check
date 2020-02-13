@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+flake8 wrapwith
+isort --check --diff --recursive wrapwith
+black --check --diff wrapwith
