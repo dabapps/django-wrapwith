@@ -1,6 +1,5 @@
 from django.template import Library
-from django.template.base import token_kwargs
-from django.template.loader_tags import construct_relative_path, do_include, IncludeNode
+from django.template.loader_tags import do_include
 
 register = Library()
 
@@ -14,51 +13,28 @@ as possible, to avoid copy-pasting duplicated code.
 """
 
 
-class PassThroughVariable:
+class RenderNodelistVariable:
     """
-    Quacks like a template.Variable, but just passes through its wrapped
-    value when resolved. Used to inject the rendered nodelist into the
-    included wrapper template
+    Quacks like a template.Variable, but wraps a nodelist which is rendered when the
+    variable is resolved. Used to inject the rendered nodelist into the
+    included wrapper template.
     """
 
-    def __init__(self, var):
-        self.var = var
+    def __init__(self, nodelist):
+        self.nodelist = nodelist
 
     def resolve(self, context):
-        return self.var
-
-
-class WrapWithNode(IncludeNode):
-    """
-    Subclass of the node used by {% include %} which just injects the rendered
-    contents of the block into the included template's context as {{ wrapped }}.
-    """
-
-    context_key = "__wrapwith_context"
-
-    def __init__(self, template, nodelist, *args, **kwargs):
-        self.nodelist = nodelist
-        super().__init__(template, *args, **kwargs)
-
-    def render(self, context):
-        self.extra_context["wrapped"] = PassThroughVariable(
-            self.nodelist.render(context)
-        )
-        return super().render(context)
+        return self.nodelist.render(context)
 
 
 @register.tag(name="wrapwith")
 def do_wrapwith(parser, token):
     """
-    Calls the do_include function, and converts the returned IncludeNode into
-    a WrapWithNode, passing in the nodelist inside the block.
+    Calls the do_include function, but injects the contents of the block into
+    the extra_context of the included template.
     """
     include_node = do_include(parser, token)
     nodelist = parser.parse(("endwrapwith",))
     parser.delete_first_token()
-    return WrapWithNode(
-        include_node.template,
-        nodelist,
-        extra_context=include_node.extra_context,
-        isolated_context=include_node.isolated_context,
-    )
+    include_node.extra_context["wrapped"] = RenderNodelistVariable(nodelist)
+    return include_node
