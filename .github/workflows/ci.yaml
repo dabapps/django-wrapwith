@@ -6,10 +6,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 2
       matrix:
-        python-version: [3.7, 3.8]
-        django-version: [1.11, 2.2, 3.0]
+        python-version: ["3.7", "3.8"]
+        django-version: ["1.11", "2.2", "3.0"]
 
     steps:
     - uses: actions/checkout@v1
