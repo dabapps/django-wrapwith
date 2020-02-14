@@ -1,5 +1,7 @@
 {% load wrapwith %}
 
+something before
+
 {% wrapwith "wrappers/divwitharg.html" with class="outer" %}
    hello!
    {% wrapwith "wrappers/divwitharg.html" with class="inner1" %}
@@ -9,3 +11,5 @@
    inner2
    {% endwrapwith %}
 {% endwrapwith %}
+
+something after

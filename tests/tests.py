@@ -20,6 +20,7 @@ class WrapWithTestCase(TestCase):
         self.assertHTMLEqual(
             rendered,
             """
+            something before
             <div class="outer">
                 hello!
                 <div class="inner1">
@@ -29,5 +30,6 @@ class WrapWithTestCase(TestCase):
                     inner2
                 </div>
             </div>
+            something after
         """,
         )
