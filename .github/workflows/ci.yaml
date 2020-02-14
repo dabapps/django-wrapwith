@@ -25,7 +25,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install django~=${{ matrix.django_version }}
+        pip install django~=${{ matrix.django-version }}
     - name: Lint
       run: scripts/check
     - name: Run tests
