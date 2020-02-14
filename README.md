@@ -42,7 +42,7 @@ Then, in your main page template:
 
 That's it!
 
-Tested with all currently supported Django and Python versions.
+Tested on Python 3 with all currently supported Django versions.
 
 ## Installation
 
