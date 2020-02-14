@@ -1,0 +1,7 @@
+{% load wrapwith %}
+
+{% with missing="missing" %}
+    {% wrapwith "wrappers/divwithargonly.html" with class="arg" only %}
+    hello!
+    {% endwrapwith %}
+{% endwith %}
