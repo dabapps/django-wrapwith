@@ -1,5 +1,5 @@
 #!/bin/sh -e
 
-autoflake --in-place --recursive wrapwith
-isort --recursive wrapwith
-black wrapwith
+autoflake --in-place --recursive wrapwith tests
+isort --recursive wrapwith tests
+black wrapwith tests

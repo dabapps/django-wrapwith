@@ -1,6 +1,6 @@
 INSTALLED_APPS = [
     "wrapwith",
-    "wrapwith.tests",
+    "tests",
 ]
 
 TEMPLATES = [
