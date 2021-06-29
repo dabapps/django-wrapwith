@@ -1,5 +1,5 @@
 #!/bin/sh -e
 
 flake8 wrapwith
-isort --check --diff --recursive wrapwith tests
+isort --check --diff wrapwith tests
 black --check --diff wrapwith tests

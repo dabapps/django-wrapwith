@@ -1,5 +1,5 @@
 #!/bin/sh -e
 
 autoflake --in-place --recursive wrapwith tests
-isort --recursive wrapwith tests
+isort wrapwith tests
 black wrapwith tests
