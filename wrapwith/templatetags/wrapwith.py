@@ -33,6 +33,7 @@ class ResolveWithAliases:
     Wraps a FilterExpression and injects the WRAPWITH_TEMPLATES alias
     dictionary into its context before resolving the variable name.
     """
+
     def __init__(self, template):
         self.template = template
         self.aliases = getattr(settings, "WRAPWITH_TEMPLATES", {})
