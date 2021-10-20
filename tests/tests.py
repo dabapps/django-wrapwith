@@ -1,5 +1,5 @@
 from django.template.loader import render_to_string
-from django.test import TestCase
+from django.test import override_settings, TestCase
 
 
 class WrapWithTestCase(TestCase):
@@ -33,3 +33,13 @@ class WrapWithTestCase(TestCase):
             something after
         """,
         )
+
+    @override_settings(WRAPWITH_TEMPLATES={"div": "wrappers/div.html"})
+    def test_alias(self):
+        rendered = render_to_string("alias.html")
+        self.assertHTMLEqual(rendered, "<div>hello!</div>")
+
+    @override_settings(WRAPWITH_TEMPLATES={"a": {"b": {"c": "wrappers/div.html"}}})
+    def test_dotted_alias(self):
+        rendered = render_to_string("alias_with_dots.html")
+        self.assertHTMLEqual(rendered, "<div>hello!</div>")
