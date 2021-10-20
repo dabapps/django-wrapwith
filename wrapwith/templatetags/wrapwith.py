@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.template import Library
 from django.template.loader_tags import do_include
 
@@ -27,6 +28,16 @@ class RenderNodelistVariable:
         return self.nodelist.render(context)
 
 
+class ResolveWithAliases:
+    def __init__(self, template):
+        self.template = template
+        self.aliases = getattr(settings, "WRAPWITH_TEMPLATES", {})
+
+    def resolve(self, context):
+        with context.push(self.aliases):
+            return self.template.resolve(context)
+
+
 @register.tag(name="wrapwith")
 def do_wrapwith(parser, token):
     """
@@ -36,5 +47,6 @@ def do_wrapwith(parser, token):
     include_node = do_include(parser, token)
     nodelist = parser.parse(("endwrapwith",))
     parser.delete_first_token()
+    include_node.template = ResolveWithAliases(include_node.template)
     include_node.extra_context["wrapped"] = RenderNodelistVariable(nodelist)
     return include_node
