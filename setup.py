@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="django-wrapwith",
-    version="0.0.1",
+    version="0.0.2",
     author="Jamie Matthews",
     author_email="jamie@dabapps.com",
     description="A Django template tag for wrapping a template block in a reusable enclosing template",
