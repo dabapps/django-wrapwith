@@ -3,7 +3,7 @@ django-wrapwith
 
 **A Django template tag for wrapping a template block in a reusable enclosing template.**
 
-Provides a block tag called `wrapwith` which behaves exactly like [the built-in `include` tag](https://docs.djangoproject.com/en/3.0/ref/templates/builtins/#include), but injects the contents of the block into the included template.
+Provides a block tag called `wrapwith` which behaves exactly like [the built-in `include` tag](https://docs.djangoproject.com/en/6.0/ref/templates/builtins/#include), but injects the contents of the block into the included template.
 
 It is intended to make wrapper markup reusable, encouraging you to break your template into "components" which might have a particular enclosing structure but varying contents. It is particularly useful with design systems that provide components (cards, blockquotes, accordians etc) that have reusable structure but arbitrary content.
 
