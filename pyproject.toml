@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-wrapwith"
+version = "0.0.2"
+description = "A Django template tag for wrapping a template block in a reusable enclosing template"
+readme = "README.md"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+authors = [
+  { name = "Jamie Matthews", email = "jamie@dabapps.com" },
+]
+requires-python = ">=3.10"
+classifiers = [
+  "Topic :: Internet :: WWW/HTTP",
+  "Environment :: Web Environment",
+  "Programming Language :: Python :: 3",
+  "Framework :: Django",
+  "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/dabapps/django-wrapwith"
+
+[tool.setuptools.packages.find]
+include = ["wrapwith*"]
